@@ -3,9 +3,6 @@ import logging
 from oslo_config import cfg
 from pecan import rest
 # from stevedore import driver as stevedore_driver
-
-from warder.common import data_models
-from warder.common import exceptions
 # from warder.db import repositories
 
 CONF = cfg.CONF
@@ -41,18 +38,3 @@ class BaseController(rest.RestController):
             converted = _convert(db_entity)
         return converted
 
-    @staticmethod
-    def _get_db_obj(session, repo, data_model, id):
-        """Gets an object from the database and returns it."""
-        db_obj = repo.get(session, id=id)
-        if not db_obj:
-            LOG.exception('%(name)s %(id)s not found',
-                          {'name': data_model._name(), 'id': id})
-            raise exceptions.NotFound(
-                resource=data_model._name(), id=id)
-        return db_obj
-
-    def _get_db_lb(self, session, id):
-        """Get a load balancer from the database."""
-        return self._get_db_obj(session, self.repositories.load_balancer,
-                                data_models.LoadBalancer, id)

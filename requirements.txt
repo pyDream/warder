@@ -10,8 +10,8 @@ sqlalchemy-migrate>=0.9.6 # Apache-2.0
 alembic>=0.4.1
 pecan>=0.9
 six
-stevedore
-WebOb>=1.4.1
+stevedore>=1.20.0
+WebOb>=1.7.1
 pymysql
 WSME>=0.8
 requests>=2.5.2

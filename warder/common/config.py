@@ -74,7 +74,6 @@ def init(args, **kwargs):
     cfg.CONF(args=args, project='warder',
              version='%%prog %s' % version.version_info.release_string(),
              **kwargs)
-    handle_deprecation_compatibility()
 
 
 def setup_logging(conf):
@@ -85,26 +84,3 @@ def setup_logging(conf):
     product_name = "warder"
     logging.setup(conf, product_name)
     LOG.info("Logging enabled!")
-
-
-# Use cfg.CONF.set_default to override the new configuration setting
-# default value.  This allows a value set, at the new location, to override
-# a value set in the previous location while allowing settings that have
-# not yet been moved to be utilized.
-def handle_deprecation_compatibility():
-    # TODO(johnsom) Remove in or after "R" release
-    if cfg.CONF.bind_host is not None:
-        cfg.CONF.set_default('bind_host', cfg.CONF.bind_host,
-                             group='api_settings')
-    # TODO(johnsom) Remove in or after "R" release
-    if cfg.CONF.bind_port is not None:
-        cfg.CONF.set_default('bind_port', cfg.CONF.bind_port,
-                             group='api_settings')
-    # TODO(johnsom) Remove in or after "R" release
-    if cfg.CONF.auth_strategy is not None:
-        cfg.CONF.set_default('auth_strategy', cfg.CONF.auth_strategy,
-                             group='api_settings')
-    # TODO(johnsom) Remove in or after "R" release
-    if cfg.CONF.api_handler is not None:
-        cfg.CONF.set_default('api_handler', cfg.CONF.api_handler,
-                             group='api_settings')
