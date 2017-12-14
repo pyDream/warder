@@ -3,8 +3,8 @@ from warder.api.common import hooks
 # Pecan Application Configurations
 # See https://pecan.readthedocs.org/en/latest/configuration.html#application-configuration # noqa
 app = {
-    'root': 'octavia.api.root_controller.RootController',
-    'modules': ['octavia.api'],
+    'root': 'warder.api.root_controller.RootController',
+    'modules': ['warder.api'],
     'hooks': [
         hooks.ContextHook(),
         hooks.QueryParametersHook()],

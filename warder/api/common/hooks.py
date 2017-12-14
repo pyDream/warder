@@ -10,7 +10,7 @@ class ContextHook(hooks.PecanHook):
 
     def on_route(self, state):
         context_obj = context.Context.from_environ(state.request.environ)
-        state.request.context['octavia_context'] = context_obj
+        state.request.context['warder_context'] = context_obj
 
 
 class QueryParametersHook(hooks.PecanHook):

@@ -25,14 +25,14 @@ class RootController(rest.RestController):
             self._versions.append(
                 {
                     'status': 'SUPPORTED',
-                    'updated': '2014-12-11T00:00:00Z',
+                    'updated': '2017-12-4T00:00:00Z',
                     'id': 'v1'
                 })
         if not (v1_enabled):
-            LOG.warning("Both v1 and v2.0 API endpoints are disabled -- is "
+            LOG.warning("V1 API endpoints are disabled -- is "
                         "this intentional?")
         elif v1_enabled:
-            LOG.warning("Both v1 and v2.0 API endpoints are enabled -- it is "
+            LOG.warning("V1 API endpoints are enabled -- it is "
                         "a security risk to expose the v1 endpoint publicly,"
                         "so please make sure access to it is secured.")
 
