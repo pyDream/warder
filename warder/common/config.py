@@ -7,6 +7,9 @@ from warder import version
 
 LOG = logging.getLogger(__name__)
 
+def _(s):
+    return s
+
 # TODO(rm_work) Remove in or after "R" release
 API_SETTINGS_DEPRECATION_MESSAGE = _(
     'This setting has moved to the [api_settings] section.')
@@ -68,7 +71,7 @@ logging.register_options(cfg.CONF)
 
 
 def init(args, **kwargs):
-    cfg.CONF(args=args, project='octavia',
+    cfg.CONF(args=args, project='warder',
              version='%%prog %s' % version.version_info.release_string(),
              **kwargs)
     handle_deprecation_compatibility()
