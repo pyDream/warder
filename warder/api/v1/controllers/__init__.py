@@ -2,16 +2,16 @@ from wsme import types as wtypes
 from wsmeext import pecan as wsme_pecan
 
 from warder.api.v1.controllers import base
-from warder.api.v1.controllers import hello_world
+from warder.api.v1.controllers import user
 
 
 class V1Controller(base.BaseController):
 
-    helloworld = None
+    users = None
 
     def __init__(self):
         super(V1Controller, self).__init__()
-        self.helloworld = hello_world.HelloWorldController()
+        self.users = user.UsersController()
 
     @wsme_pecan.wsexpose(wtypes.text)
     def get(self):
