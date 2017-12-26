@@ -21,16 +21,11 @@ reference
 import datetime
 
 from oslo_config import cfg
-from oslo_db import exception as db_exception
 from oslo_log import log as logging
-from oslo_utils import excutils
-from oslo_utils import uuidutils
 from sqlalchemy.orm import joinedload
 
 from warder.common import constants as consts
 from warder.common import data_models
-from warder.common import exceptions
-from warder.common import validate
 from warder.db import models
 
 CONF = cfg.CONF

@@ -3,7 +3,7 @@ import logging
 from oslo_config import cfg
 from pecan import rest
 # from stevedore import driver as stevedore_driver
-# from warder.db import repositories
+from warder.db import repositories
 
 CONF = cfg.CONF
 LOG = logging.getLogger(__name__)
@@ -13,7 +13,7 @@ class BaseController(rest.RestController):
 
     def __init__(self):
         super(BaseController, self).__init__()
-        # self.repositories = repositories.Repositories()
+        self.repositories = repositories.Repositories()
         # self.handler = stevedore_driver.DriverManager(
         #     namespace='warder.api.handlers',
         #     name=CONF.api_settings.api_handler,

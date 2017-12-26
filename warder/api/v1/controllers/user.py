@@ -1,3 +1,5 @@
+import uuid
+
 from oslo_config import cfg
 from oslo_log import log as logging
 import pecan
@@ -42,10 +44,13 @@ class UsersController(base.BaseController):
     def get_all(self):
          pass
 
-    @wsme_pecan.wsexpose(hw_types.UserResponse, body=hw_types.
-                         UserPost, status_code=202)
+    @wsme_pecan.wsexpose(hw_types.UserRootResponse, body=hw_types.
+                         UserRootPost, status_code=202)
     def post(self, user):
-        print user
+        context = pecan.request.context.get('warder_context')
+        user["user"]["user_id"] = uuid.uuid4()
+        add_user_rel = self.repositories.user.create(context.session, user)
+        return self._convert_db_to_type(add_user_rel, [hw_types.UserResponse])
 
     @pecan.expose()
     def _lookup(self, user_id, *remainder):
