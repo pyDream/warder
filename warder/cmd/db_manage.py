@@ -110,7 +110,7 @@ def main():
                                      os.pardir, 'db/alembic.ini'))
     )
     config.set_main_option('script_location',
-                           'warder.db.sqlalchemy:alembic')
+                           'warder.db.migration:alembic')
     # attach the warder conf to the Alembic conf
     config.warder_config = CONF
 
