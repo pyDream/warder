@@ -106,7 +106,8 @@ CONF.register_cli_opt(command_opt)
 
 def main():
     config = alembic_cfg.Config(
-        os.path.join(os.path.dirname(os.getcwd()), 'db/alembic.ini')
+        os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                     os.pardir, 'db/alembic.ini'))
     )
     config.set_main_option('script_location',
                            'warder.db.sqlalchemy:alembic')

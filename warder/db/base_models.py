@@ -1,6 +1,7 @@
 from oslo_db.sqlalchemy import models
 from oslo_utils import uuidutils
 import sqlalchemy as sa
+from sqlalchemy import orm
 from sqlalchemy.ext import declarative
 from sqlalchemy.orm import collections
 
@@ -8,6 +9,25 @@ from sqlalchemy.orm import collections
 class WarderBase(models.ModelBase):
 
     __data_model__ = None
+    __table_args__ = {'mysql_engine': 'InnoDB'}
+
+    def __iter__(self):
+        self._i = iter(orm.object_mapper(self).columns)
+        return self
+
+    def next(self):
+        n = next(self._i).name
+        return n, getattr(self, n)
+
+    __next__ = next
+
+    def __repr__(self):
+        """sqlalchemy based automatic __repr__ method."""
+        items = ['%s=%r' % (col.name, getattr(self, col.name))
+                 for col in self.__table__.columns]
+        return "<%s.%s[object at %x] {%s}>" % (self.__class__.__module__,
+                                               self.__class__.__name__,
+                                               id(self), ', '.join(items))
 
     @staticmethod
     def _get_unique_key(obj):
