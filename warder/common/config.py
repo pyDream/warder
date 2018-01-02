@@ -15,19 +15,6 @@ API_SETTINGS_DEPRECATION_MESSAGE = _(
     'This setting has moved to the [api_settings] section.')
 
 core_opts = [
-    # TODO(johnsom) Remove in or after "R" release
-    cfg.IPOpt('bind_host', help=_("The host IP to bind to"),
-              deprecated_for_removal=True,
-              deprecated_reason=API_SETTINGS_DEPRECATION_MESSAGE),
-    # TODO(johnsom) Remove in or after "R" release
-    cfg.PortOpt('bind_port', help=_("The port to bind to"),
-                deprecated_for_removal=True,
-                deprecated_reason=API_SETTINGS_DEPRECATION_MESSAGE),
-    # TODO(johnsom) Remove in or after "R" release
-    cfg.StrOpt('api_handler',
-               help=_("The handler that the API communicates with"),
-               deprecated_for_removal=True,
-               deprecated_reason=API_SETTINGS_DEPRECATION_MESSAGE),
 ]
 
 api_opts = [
