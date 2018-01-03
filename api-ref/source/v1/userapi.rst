@@ -43,7 +43,7 @@ Create a User.
                 "gender": "test",
                 "age": "18",
                 "email": "test11@qq.com",
-                "telephone": "10086"
+                "telephone": ["10086"]
             }
     }
 

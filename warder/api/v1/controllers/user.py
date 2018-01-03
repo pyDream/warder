@@ -47,8 +47,13 @@ class UsersController(base.BaseController):
     @wsme_pecan.wsexpose(hw_types.UserRootResponse, body=hw_types.
                          UserRootPost, status_code=202)
     def post(self, user):
+        tels_inf = []
         context = pecan.request.context.get('warder_context')
-        user["user"]["user_id"] = uuid.uuid4()
+        user_id = uuid.uuid4()
+        user["user"]["user_id"] = user_id
+        for tel in user["user"]["telephone"]:
+            tels_inf.append(dict(telnumber=tel, user_id=user_id))
+        user["user"]["telephone"] = tels_inf
         add_user_rel = self.repositories.user.create(context.session, user)
         return self._convert_db_to_type(add_user_rel, [hw_types.UserResponse])
 
