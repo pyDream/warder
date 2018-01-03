@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 from logging.config import fileConfig
 
 from warder.db import base_models
+from warder.db.migration.models import head
 
 
 # this is the Alembic Config object, which provides

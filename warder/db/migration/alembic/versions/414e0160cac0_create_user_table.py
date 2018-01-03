@@ -17,7 +17,15 @@ depends_on = None
 
 
 def upgrade():
-    pass
+    op.create_table(
+        u'user',
+        sa.Column(u'id', sa.Integer, primary_key=True),
+        sa.Column(u'user_id', sa.String(255), nullable=True, unique=True),
+        sa.Column(u'name', sa.String(64), nullable=False, unique=True),
+        sa.Column(u'gender', sa.String(64), nullable=False),
+        sa.Column(u'age', sa.Integer, nullable=False),
+        sa.Column(u'email', sa.String(255))
+    )
 
 
 def downgrade():
