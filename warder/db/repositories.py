@@ -25,7 +25,7 @@ from oslo_log import log as logging
 from sqlalchemy.orm import joinedload
 
 from warder.common import constants as consts
-from warder.common import data_models
+#from warder.common import data_models
 from warder.db import models
 
 CONF = cfg.CONF
