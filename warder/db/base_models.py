@@ -34,8 +34,8 @@ class WarderBase(models.ModelBase):
         """Returns a unique key for passed object for data model building."""
         # First handle all objects with their own ID, then handle subordinate
         # objects.
-        if obj.__class__.__name__ in ['User']:
-            return obj.__class__.__name__ + obj.id
+        if obj.__class__.__name__ in ['User', 'Telephone']:
+            return obj.__class__.__name__ + obj.user_id
         else:
             raise NotImplementedError
 

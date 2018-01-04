@@ -45,7 +45,7 @@ class UsersController(base.BaseController):
     def get_all(self):
          pass
 
-    @wsme_pecan.wsexpose(hw_types.UserRootResponse, body=hw_types.
+    @wsme_pecan.wsexpose(hw_types.UserResponse, body=hw_types.
                          UserPost, status_code=202)
     def post(self, user):
         user_dict = user.to_dict()

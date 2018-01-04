@@ -91,7 +91,8 @@ class User(BaseDataModel):
         return "<User(user_id='%s', name='%s', gender='%s',age='%s',email='%s')>" % (
             self.user_id, self.name, self.gender, self.age, self.email)
 
-    def __init__(self, user_id, name, gender, age, email, telephone):
+    def __init__(self, id, user_id, name, gender, age, email, telephone):
+        self.id = id
         self.user_id = user_id
         self.name = name
         self.gender = gender
@@ -100,11 +101,11 @@ class User(BaseDataModel):
         self.telephone = telephone
 
 
-# class Telephone(BaseDataModel):
-#     def __repr__(self):
-#         return "<Telephone(user_id='%s', telnumber='%s')>" % (
-#             self.user_id, self.telnumber)
-#
-#     def __init__(self, user_id, telnumber):
-#         self.user_id = user_id
-#         self.telnumber = telnumber
+class Telephone(BaseDataModel):
+    def __repr__(self):
+        return "<Telephone(user_id='%s', telnumber='%s')>" % (
+            self.user_id, self.telnumber)
+
+    def __init__(self, user_id, telnumber):
+        self.user_id = user_id
+        self.telnumber = telnumber

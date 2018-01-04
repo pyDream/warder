@@ -18,15 +18,11 @@ Defines interface for DB access that Controllers may
 reference
 """
 
-import datetime
-import json
-
 from oslo_config import cfg
 from oslo_log import log as logging
 from sqlalchemy.orm import joinedload
 
 from warder.common import constants as consts
-#from warder.common import data_models
 from warder.db import models
 
 CONF = cfg.CONF
@@ -147,10 +143,9 @@ class UserRepository(BaseRepository):
 
     def add_user(self, session, user_dict):
         phones = []
-        for tel_numb in json.load(user_dict["telephone"]):
+        for tel_numb in user_dict["telephone"]:
             db_phone = models.Telephone(telnumber=tel_numb)
             phones.append(db_phone)
         user_dict["telephone"] = phones
-        #db_user = self.model_class(user_dict)
-        return self.create(session, user_dict)
+        return self.create(session, **user_dict)
 
