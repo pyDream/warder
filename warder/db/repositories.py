@@ -19,6 +19,7 @@ reference
 """
 
 import datetime
+import json
 
 from oslo_config import cfg
 from oslo_log import log as logging
@@ -143,4 +144,13 @@ class Repositories(object):
 
 class UserRepository(BaseRepository):
     model_class = models.User
+
+    def add_user(self, session, user_dict):
+        phones = []
+        for tel_numb in json.load(user_dict["telephone"]):
+            db_phone = models.Telephone(telnumber=tel_numb)
+            phones.append(db_phone)
+        user_dict["telephone"] = phones
+        #db_user = self.model_class(user_dict)
+        return self.create(session, user_dict)
 

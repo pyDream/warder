@@ -30,6 +30,7 @@ class User(base_models.BASE):
 
 class Telephone(base_models.BASE):
 
+    __data_model__ = data_models.Telephone
     __tablename__ = 'telephone'
     id = Column(Integer, primary_key=True)
     telnumber = Column(String(255), nullable=False)

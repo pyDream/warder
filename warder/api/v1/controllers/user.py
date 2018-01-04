@@ -1,4 +1,5 @@
 import uuid
+import json
 
 from oslo_config import cfg
 from oslo_log import log as logging
@@ -45,16 +46,13 @@ class UsersController(base.BaseController):
          pass
 
     @wsme_pecan.wsexpose(hw_types.UserRootResponse, body=hw_types.
-                         UserRootPost, status_code=202)
+                         UserPost, status_code=202)
     def post(self, user):
-        tels_inf = []
+        user_dict = user.to_dict()
         context = pecan.request.context.get('warder_context')
-        user_id = uuid.uuid4()
-        user["user"]["user_id"] = user_id
-        for tel in user["user"]["telephone"]:
-            tels_inf.append(dict(telnumber=tel, user_id=user_id))
-        user["user"]["telephone"] = tels_inf
-        add_user_rel = self.repositories.user.create(context.session, user)
+        user_dict["user_id"] = str(uuid.uuid4())
+
+        add_user_rel = self.repositories.user.add_user(context.session, user_dict)
         return self._convert_db_to_type(add_user_rel, [hw_types.UserResponse])
 
     @pecan.expose()
