@@ -35,7 +35,7 @@ class WarderBase(models.ModelBase):
         # First handle all objects with their own ID, then handle subordinate
         # objects.
         if obj.__class__.__name__ in ['User', 'Telephone']:
-            return obj.__class__.__name__ + obj.user_id
+            return obj.__class__.__name__ + str(obj.id)
         else:
             raise NotImplementedError
 
