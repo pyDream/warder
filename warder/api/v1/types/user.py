@@ -19,12 +19,11 @@ class UserRootResponse(base.BaseType):
 
 
 class UserPost(base.BaseType):
-    user_id = wtypes.text
     name = wtypes.text
     gender = wtypes.text
     age = int
     email = wtypes.text
-    phone = wtypes.ArrayType(wtypes.text)
+    telephone = wtypes.ArrayType(wtypes.text)
 
 
 class UserRootPost(base.BaseType):
