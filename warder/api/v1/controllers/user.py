@@ -1,5 +1,4 @@
 import uuid
-import json
 
 from oslo_config import cfg
 from oslo_log import log as logging
@@ -19,7 +18,7 @@ class UserController(base.BaseController):
     def __init__(self, user_id):
         super(UserController, self).__init__()
         self.user_id = user_id
-        #self.handler = self.handler.load_balancer
+        # self.handler = self.handler.load_balancer
 
     _custom_actions = {
         'detail': ['GET'],
@@ -43,16 +42,18 @@ class UserController(base.BaseController):
 class UsersController(base.BaseController):
 
     def get_all(self):
-         pass
+        pass
 
     @wsme_pecan.wsexpose(hw_types.UserResponse, body=hw_types.
-                         UserPost, status_code=202)
-    def post(self, user):
+                         UserRootPost, status_code=202)
+    def post(self, user_inf):
+        user = user_inf.user
         user_dict = user.to_dict()
         context = pecan.request.context.get('warder_context')
         user_dict["user_id"] = str(uuid.uuid4())
 
-        add_user_rel = self.repositories.user.add_user(context.session, user_dict)
+        add_user_rel = self.repositories.user.add_user(
+            context.session, user_dict)
         return self._convert_db_to_type(add_user_rel, [hw_types.UserResponse])
 
     @pecan.expose()
