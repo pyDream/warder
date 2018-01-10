@@ -41,11 +41,16 @@ class UserController(base.BaseController):
 
 class UsersController(base.BaseController):
 
+    @wsme_pecan.wsexpose(hw_types.UserListResponse, status_code=200)
     def get_all(self):
-        pass
+        context = pecan.request.context.get('warder_context')
+        users_inf, links = self.repositories.user.get_all(context.session)
+        result = self._convert_db_to_type(users_inf,
+                                          [hw_types.UserResponse])
+        return hw_types.UserListResponse(users=result)
 
     @wsme_pecan.wsexpose(hw_types.UserResponse, body=hw_types.
-                         UserRootPost, status_code=202)
+                         UserRootPost, status_code=201)
     def post(self, user_inf):
         user = user_inf.user
         user_dict = user.to_dict()

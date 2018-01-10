@@ -47,7 +47,7 @@ class BaseRepository(object):
 
         :param session: A Sql Alchemy database session.
         :param model_kwargs: Attributes of the model to insert.
-        :returns: octavia.common.data_model
+        :returns: warder.db.data_models
         """
         with session.begin(subtransactions=True):
             model = self.model_class(**model_kwargs)
@@ -77,7 +77,7 @@ class BaseRepository(object):
 
         :param session: A Sql Alchemy database session.
         :param model_kwargs: Entity attributes that should be updates.
-        :returns: octavia.common.data_model
+        :returns: warder.db.data_models
         """
         with session.begin(subtransactions=True):
             session.query(self.model_class).filter_by(
@@ -88,7 +88,7 @@ class BaseRepository(object):
 
         :param session: A Sql Alchemy database session.
         :param filters: Filters to decide which entity should be retrieved.
-        :returns: octavia.common.data_model
+        :returns: warder.db.data_models
         """
         model = session.query(self.model_class).filter_by(**filters).first()
         if not model:
@@ -102,7 +102,7 @@ class BaseRepository(object):
         :param session: A Sql Alchemy database session.
         :param pagination_helper: Helper to apply pagination and sorting.
         :param filters: Filters to decide which entities should be retrieved.
-        :returns: [octavia.common.data_model]
+        :returns: [warder.db.data_models]
         """
         deleted = filters.pop('show_deleted', True)
         query = session.query(self.model_class).filter_by(**filters)
@@ -128,7 +128,7 @@ class BaseRepository(object):
 
         :param session: A Sql Alchemy database session.
         :param id: id of entity to check for existence.
-        :returns: octavia.common.data_model
+        :returns: warder.db.data_models
         """
         return bool(session.query(self.model_class).filter_by(id=id).first())
 

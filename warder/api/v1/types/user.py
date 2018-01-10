@@ -2,20 +2,10 @@ from wsme import types as wtypes
 from warder.api.common import types as base
 
 
-class ResultResponse(base.BaseType):
-    status = wtypes.text
-    expect = wtypes.text
-
-
 class UserResponse(base.BaseType):
     """Defines the response and acceptable POST request attributes."""
     user_id = wtypes.wsattr(wtypes.UuidType())
     name = wtypes.text
-
-
-class UserRootResponse(base.BaseType):
-    user = wtypes.wsattr(UserResponse)
-    result = wtypes.wsattr(ResultResponse)
 
 
 class UserPost(base.BaseType):
@@ -28,3 +18,8 @@ class UserPost(base.BaseType):
 
 class UserRootPost(base.BaseType):
     user = wtypes.wsattr(UserPost)
+
+
+class UserListResponse(base.BaseType):
+    users = wtypes.wsattr([UserResponse])
+

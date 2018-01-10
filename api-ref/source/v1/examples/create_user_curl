@@ -1,1 +1,1 @@
-curl -X POST -H "Content-Type: application/json" -d '{"name": "test11","gender": "test","age": 18,"email": "test11@qq.com","telephone": ["10086"]}' http://10.133.146.119:6666/v1/users
+curl -X POST -H "Content-Type: application/json" -d '{"user":{"name": "test11","gender": "test","age": 18,"email": "test11@qq.com","telephone": ["10086"]}}' http://10.133.146.119:6666/v1/users

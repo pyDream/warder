@@ -50,12 +50,6 @@ Create a User.
 **Response Example**::
 
     {
-        "user":{
-                "user_id": "uuid",
-                "name": "test11"
-            },
-         "result":{
-                   "status":"success",
-                   "expect":""
-         }
-    }
+        "user_id": "uuid",
+        "name": "test11"
+     }
