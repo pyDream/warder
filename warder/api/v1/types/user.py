@@ -23,3 +23,10 @@ class UserRootPost(base.BaseType):
 class UserListResponse(base.BaseType):
     users = wtypes.wsattr([UserResponse])
 
+class UserDetailRespone(base.BaseType):
+    user_id = wtypes.wsattr(wtypes.UuidType())
+    name = wtypes.text
+    gender = wtypes.text
+    age = int
+    email = wtypes.text
+    telephone = wtypes.ArrayType(wtypes.text)

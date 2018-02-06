@@ -1,18 +1,3 @@
-# Copyright 2014 Rackspace
-# Copyright 2016 Blue Box, an IBM Company
-#
-#    Licensed under the Apache License, Version 2.0 (the "License"); you may
-#    not use this file except in compliance with the License. You may obtain
-#    a copy of the License at
-#
-#         http://www.apache.org/licenses/LICENSE-2.0
-#
-#    Unless required by applicable law or agreed to in writing, software
-#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-#    License for the specific language governing permissions and limitations
-#    under the License.
-
 """
 Defines interface for DB access that Controllers may
 reference
@@ -24,6 +9,7 @@ from sqlalchemy.orm import joinedload
 
 from warder.common import constants as consts
 from warder.db import models
+from warder.common import exceptions
 
 CONF = cfg.CONF
 
@@ -149,3 +135,19 @@ class UserRepository(BaseRepository):
         user_dict["telephone"] = phones
         return self.create(session, **user_dict)
 
+    def get_user(self, session, user_id):
+        db_obj = self.get(session, user_id = user_id)
+        if not db_obj:
+            LOG.exception('User %(user_id)s not found',
+                          {"user_id":user_id})
+            raise exceptions.NotFound(resource="User", id=user_id)
+        return  db_obj
+
+    def update_user(self, session, user_id, **user_dict):
+        if user_dict.has_key('telephone'):
+            phones = []
+            for phone in user_dict['telephone']:
+                db_phone = models.Telephone(telnumber=phone)
+                phones.append(db_phone)
+            user_dict['telephone'] = phones
+        self.update(session, user_id, **user_dict)

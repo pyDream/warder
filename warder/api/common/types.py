@@ -36,8 +36,8 @@ class BaseType(wtypes.Base):
                     del new_dict[key]
         return cls(**new_dict)
 
-    def to_dict(self, resnder_unsets=False):
-        """Converts Octavia WSME type to dictionary.
+    def to_dict(self, render_unsets=False):
+        """Converts warder WSME type to dictionary.
 
         :param render_unsets: If True, will convert items that are WSME Unset
                               types to None. If False, does not add the item
